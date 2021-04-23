@@ -67,6 +67,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
         ),
         SocialAdressInput(
           prefix: linkedinPrefix,
+        ),
+        SocialAdressInput(
+          prefix: behancePrefix,
+        ),
+        SocialAdressInput(
+          prefix: dribblePrefix,
         )
       ],
     );

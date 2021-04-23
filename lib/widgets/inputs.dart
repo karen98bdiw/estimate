@@ -73,7 +73,7 @@ class CustomFormInput extends StatelessWidget {
                   child: prefix,
                 )
               : null,
-          suffixIcon: prefix != null
+          suffixIcon: sufix != null
               ? Padding(
                   padding: EdgeInsetsDirectional.only(
                     top: 14,
@@ -143,7 +143,7 @@ class SocialAdressInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 16),
+      padding: EdgeInsets.only(top: 0),
       child: TextFormField(
         textAlign: textCentered ? TextAlign.center : TextAlign.start,
         obscureText: obscureText,
@@ -162,6 +162,7 @@ class SocialAdressInput extends StatelessWidget {
                 )
               : null,
           isDense: true,
+          isCollapsed: true,
           contentPadding: EdgeInsetsDirectional.only(
             top: 25,
             bottom: 4,

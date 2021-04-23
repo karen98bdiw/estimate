@@ -146,7 +146,7 @@ class _AddintionalInfoState extends State<AddintionalInfo> {
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.07,
+            height: MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(width: 1, color: mainBorderColor),
@@ -209,6 +209,7 @@ class _AddintionalInfoState extends State<AddintionalInfo> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
