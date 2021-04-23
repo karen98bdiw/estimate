@@ -19,6 +19,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         CustomFormInput(
           hint: "Full name",
@@ -65,15 +66,15 @@ class _PersonalInfoState extends State<PersonalInfo> {
           hint: "Street adress",
           prefix: adressPrefix,
         ),
-        SocialAdressInput(
-          prefix: linkedinPrefix,
-        ),
-        SocialAdressInput(
-          prefix: behancePrefix,
-        ),
-        SocialAdressInput(
-          prefix: dribblePrefix,
-        )
+        // SocialAdressInput(
+        //   prefix: linkedinPrefix,
+        // ),
+        // SocialAdressInput(
+        //   prefix: behancePrefix,
+        // ),
+        // SocialAdressInput(
+        //   prefix: dribblePrefix,
+        // )
       ],
     );
   }

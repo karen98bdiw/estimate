@@ -30,47 +30,43 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
           children: [
             SvgPicture.asset(
               "assets/images/roundedAppBarClip.svg",
-              fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width,
             ),
             Padding(
               padding: EdgeInsets.only(
                 left: 16,
                 right: 16,
                 top: 30,
+                bottom: 10,
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    FormScreenTitle("Profile (designer)"),
-                    RegisterScreenNumbers(actionNumber),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    actions[actionNumber],
-                    SizedBox(
-                      height: 25,
-                    ),
-                    ScreenActionChangeButton(
-                      onBackButtonClick: () {
-                        if (actionNumber - 1 > -1) {
-                          setState(() {
-                            actionNumber--;
-                          });
-                        }
-                      },
-                      onButtonClick: () {
-                        if (actionNumber < actions.length - 1) {
-                          setState(() {
-                            actionNumber++;
-                          });
-                        }
-                      },
-                      buttonTitle:
-                          actionNumber == actions.length - 1 ? "SAVE" : "NEXT",
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  top(),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.60,
+                    child: actions[actionNumber],
+                  ),
+                  ScreenActionChangeButton(
+                    onBackButtonClick: () {
+                      if (actionNumber - 1 > -1) {
+                        setState(() {
+                          actionNumber--;
+                        });
+                      }
+                    },
+                    onButtonClick: () {
+                      if (actionNumber < actions.length - 1) {
+                        setState(() {
+                          actionNumber++;
+                        });
+                      }
+                    },
+                    buttonTitle:
+                        actionNumber == actions.length - 1 ? "SAVE" : "NEXT",
+                  ),
+                ],
               ),
             ),
           ],
@@ -78,4 +74,12 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
       ),
     );
   }
+
+  Widget top() => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FormScreenTitle("Profile (designer)"),
+          RegisterScreenNumbers(actionNumber),
+        ],
+      );
 }

@@ -14,21 +14,13 @@ class _AddintionalInfoState extends State<AddintionalInfo> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         designTypeCheckView(
             onItemSize: MediaQuery.of(context).size.width * 0.30),
-        SizedBox(
-          height: 10,
-        ),
         skillsCheckView(),
-        SizedBox(
-          height: 10,
-        ),
         seniorityLevelCheck(
             onItemSize: MediaQuery.of(context).size.width * 0.45),
-        SizedBox(
-          height: 10,
-        ),
         workMission(onItemSize: MediaQuery.of(context).size.width * 0.3),
       ],
     );

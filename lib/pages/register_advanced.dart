@@ -4,6 +4,7 @@ import 'package:estimators_app/pages/info_registring_screens.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/country.dart';
 import 'package:estimators_app/utils/enums.dart';
+import 'package:estimators_app/utils/styles.dart';
 import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/country_code_picker.dart';
 import 'package:estimators_app/widgets/inputs.dart';
@@ -38,7 +39,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
           children: [
             SvgPicture.asset(
               "assets/images/roundedAppBarClip.svg",
-              fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width,
             ),
             Padding(
               padding: formScaffoldPadding,
@@ -115,12 +116,14 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  width: MediaQuery.of(context).size.width * 0.40,
                   height: MediaQuery.of(context).size.height * 0.045,
                   padding: EdgeInsets.all(7),
                   child: AutoSizeText(
                     "Estimate Project",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
+                    textAlign: TextAlign.center,
+                    style: mediumTextStyle(
+                      color: Colors.black,
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -139,17 +142,17 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                   color: Color.fromRGBO(1, 97, 137, 1),
                 ),
                 Container(
+                  width: MediaQuery.of(context).size.width * 0.40,
                   height: MediaQuery.of(context).size.height * 0.045,
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.045),
                   padding: EdgeInsets.all(7),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AutoSizeText(
                         "Be Partner",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: mediumTextStyle(color: Colors.black),
                       ),
                       SizedBox(
                         width: 7,
