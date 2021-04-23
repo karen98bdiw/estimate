@@ -1,79 +1,38 @@
+import 'package:flutter/material.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/styles.dart';
-import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/helpers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileDesignerScreen extends StatefulWidget {
+class AddintionalInfo extends StatefulWidget {
   @override
-  _ProfileDesignerScreenState createState() => _ProfileDesignerScreenState();
+  _AddintionalInfoState createState() => _AddintionalInfoState();
 }
 
-class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
-  int actionNumber = 1; //will controll the number of reg screen;
+class _AddintionalInfoState extends State<AddintionalInfo> {
   bool someValue = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: mainWhiteBackgroundColor,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            SvgPicture.asset(
-              "assets/images/roundedAppBarClip.svg",
-              fit: BoxFit.fill,
-            ),
-            Padding(
-              padding: formScaffoldPadding,
-              //TODO make top unscrollable
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    FormScreenTitle("Profile (designer)"),
-                    RegisterScreenNumbers(actionNumber),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    additionalInfo(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ScreenActionChangeButton(
-                      onBackButtonClick: () {},
-                      onButtonClick: () {},
-                      buttonTitle: "NEXT",
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+    return Column(
+      children: [
+        designTypeCheckView(
+            onItemSize: MediaQuery.of(context).size.width * 0.30),
+        SizedBox(
+          height: 10,
         ),
-      ),
+        skillsCheckView(),
+        SizedBox(
+          height: 10,
+        ),
+        seniorityLevelCheck(
+            onItemSize: MediaQuery.of(context).size.width * 0.45),
+        SizedBox(
+          height: 10,
+        ),
+        workMission(onItemSize: MediaQuery.of(context).size.width * 0.3),
+      ],
     );
   }
-
-  Widget additionalInfo() => Column(
-        children: [
-          designTypeCheckView(
-              onItemSize: MediaQuery.of(context).size.width * 0.45),
-          SizedBox(
-            height: 20,
-          ),
-          skillsCheckView(),
-          SizedBox(
-            height: 20,
-          ),
-          seniorityLevelCheck(
-              onItemSize: MediaQuery.of(context).size.width * 0.45),
-          SizedBox(
-            height: 20,
-          ),
-          workMission(onItemSize: MediaQuery.of(context).size.width * 0.3),
-        ],
-      );
 
   Widget designTypeCheckView({double onItemSize}) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +54,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 width: onItemSize,
                 child: TitledCheckBox(
                   value: someValue,
-                  title: "Web Design",
+                  title: "Web",
                   onChanged: (v) {
                     setState(() {
                       someValue = v;
@@ -108,7 +67,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 width: onItemSize,
                 child: TitledCheckBox(
                   value: someValue,
-                  title: "Industrial Design",
+                  title: "Industrial",
                   onChanged: (v) {
                     setState(() {
                       someValue = v;
@@ -121,7 +80,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 width: onItemSize,
                 child: TitledCheckBox(
                   value: someValue,
-                  title: "Graphic Design",
+                  title: "Graphic",
                   onChanged: (v) {
                     setState(() {
                       someValue = v;
@@ -134,7 +93,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 width: onItemSize,
                 child: TitledCheckBox(
                   value: someValue,
-                  title: "3D Design",
+                  title: "3D",
                   onChanged: (v) {
                     setState(() {
                       someValue = v;
@@ -147,7 +106,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 width: onItemSize,
                 child: TitledCheckBox(
                   value: someValue,
-                  title: "UI/UX Design",
+                  title: "UI/UX",
                   onChanged: (v) {
                     setState(() {
                       someValue = v;
@@ -160,7 +119,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 width: onItemSize,
                 child: TitledCheckBox(
                   value: someValue,
-                  title: "Animation Design",
+                  title: "Animation",
                   onChanged: (v) {
                     setState(() {
                       someValue = v;
@@ -187,7 +146,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.09,
+            height: MediaQuery.of(context).size.height * 0.07,
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(width: 1, color: mainBorderColor),
@@ -215,8 +174,8 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                   alignment: Alignment.centerRight,
                   child: Container(
                     margin: EdgeInsets.only(right: 14),
-                    width: 30,
-                    height: 30,
+                    width: 25,
+                    height: 25,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(width: 2),
@@ -224,7 +183,7 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                     child: Center(
                       child: Icon(
                         Icons.add,
-                        size: 27,
+                        size: 22,
                       ),
                     ),
                   ),

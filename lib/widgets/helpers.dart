@@ -33,15 +33,15 @@ class RegisterScreenNumbers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          numberView(index: 1, curentNumber: number, title: "Detailis"),
+          numberView(index: 0, curentNumber: number, title: "Detailis"),
           SizedBox(
             width: 10,
           ),
-          numberView(index: 2, curentNumber: number, title: "Information")
+          numberView(index: 1, curentNumber: number, title: "Information")
         ],
       ),
     );
@@ -61,7 +61,7 @@ class RegisterScreenNumbers extends StatelessWidget {
                     : null),
             child: Center(
               child: Text(
-                index.toString(),
+                (index + 1).toString(),
                 style: mediumTextStyle(
                     color: index == curentNumber ? Colors.white : greyShape),
               ),

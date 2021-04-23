@@ -41,6 +41,7 @@ class CustomFormInput extends StatelessWidget {
   final Widget prefix;
   final Widget sufix;
   final bool obscureText;
+  final bool textCentered;
 
   CustomFormInput({
     this.onSaved,
@@ -48,6 +49,7 @@ class CustomFormInput extends StatelessWidget {
     this.hint,
     this.prefix,
     this.obscureText = false,
+    this.textCentered = false,
     this.sufix,
   });
   @override
@@ -55,64 +57,125 @@ class CustomFormInput extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 16),
       child: TextFormField(
+        textAlign: textCentered ? TextAlign.center : TextAlign.start,
         obscureText: obscureText,
         validator: validator,
         onSaved: onSaved,
         decoration: InputDecoration(
-            prefixIcon: prefix != null
-                ? Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      top: 14,
-                      start: 14,
-                      end: 14,
-                      bottom: 14,
-                    ),
-                    child: prefix,
-                  )
-                : null,
-            suffixIcon: prefix != null
-                ? Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      top: 14,
-                      start: 14,
-                      end: 14,
-                      bottom: 14,
-                    ),
-                    child: sufix,
-                  )
-                : null,
-            isDense: true,
-            contentPadding: EdgeInsetsDirectional.only(
-              top: 12,
-              bottom: 12,
-              start: 14,
-              end: 14,
-            ),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: mainBorderColor,
-                  width: 1,
-                )),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: mainBorderColor,
-                  width: 1,
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: mainBorderColor,
-                  width: 1,
-                )),
-            hintText: hint,
-            hintStyle: TextStyle(
-              color: Color.fromRGBO(137, 137, 137, 1),
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
-              height: 1,
-            )),
+          prefixIcon: prefix != null
+              ? Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    top: 14,
+                    start: 14,
+                    end: 14,
+                    bottom: 14,
+                  ),
+                  child: prefix,
+                )
+              : null,
+          suffixIcon: prefix != null
+              ? Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    top: 14,
+                    start: 14,
+                    end: 14,
+                    bottom: 14,
+                  ),
+                  child: sufix,
+                )
+              : null,
+          isDense: true,
+          contentPadding: EdgeInsetsDirectional.only(
+            top: 14,
+            bottom: 14,
+            start: 14,
+            end: 14,
+          ),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                color: mainBorderColor,
+                width: 1,
+              )),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                color: mainBorderColor,
+                width: 1,
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                color: mainBorderColor,
+                width: 1,
+              )),
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: Color.fromRGBO(137, 137, 137, 1),
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            height: 1,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SocialAdressInput extends StatelessWidget {
+  final FormFieldSetter<String> onSaved;
+  final FormFieldValidator<String> validator;
+  final String hint;
+  final Widget prefix;
+  final Widget sufix;
+  final bool obscureText;
+  final bool textCentered;
+
+  SocialAdressInput({
+    this.onSaved,
+    this.validator,
+    this.hint = "https://",
+    this.prefix,
+    this.obscureText = false,
+    this.textCentered = false,
+    this.sufix,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 16),
+      child: TextFormField(
+        textAlign: textCentered ? TextAlign.center : TextAlign.start,
+        obscureText: obscureText,
+        validator: validator,
+        onSaved: onSaved,
+        decoration: InputDecoration(
+          prefixIcon: prefix != null
+              ? Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    top: 20,
+                    start: 0,
+                    end: 5,
+                    bottom: 4,
+                  ),
+                  child: prefix,
+                )
+              : null,
+          isDense: true,
+          contentPadding: EdgeInsetsDirectional.only(
+            top: 25,
+            bottom: 4,
+            start: 5,
+            end: 14,
+          ),
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: Color.fromRGBO(137, 137, 137, 1),
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            height: 1,
+          ),
+        ),
       ),
     );
   }

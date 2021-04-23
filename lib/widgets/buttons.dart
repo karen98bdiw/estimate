@@ -72,20 +72,22 @@ class ScreenActionChangeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CustomBackButton(
-          onTap: onBackButtonClick,
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Expanded(
-            child: CustomBtn(
-          title: buttonTitle ?? "",
-          onClick: onButtonClick,
-        )),
-      ],
+    return IntrinsicHeight(
+      child: Row(
+        children: [
+          CustomBackButton(
+            onTap: onBackButtonClick,
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+              child: CustomBtn(
+            title: buttonTitle ?? "",
+            onClick: onButtonClick,
+          )),
+        ],
+      ),
     );
     ;
   }

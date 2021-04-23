@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:estimators_app/pages/profile_designer_screen.dart';
+import 'package:estimators_app/pages/info_registring_screens.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/country.dart';
 import 'package:estimators_app/utils/enums.dart';

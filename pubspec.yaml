@@ -63,6 +63,14 @@ flutter:
     - assets/icons/emailPrefix.svg
     - assets/icons/passwordPrefix.svg
     - assets/icons/passwordSuffix.svg
+    - assets/icons/adressPrefix.svg
+    - assets/icons/behancePrefix.svg
+    - assets/icons/buildingPrefix.svg
+    - assets/icons/dribblePrefix.svg
+    - assets/icons/linkedinPrefix.svg
+    - assets/icons/locationPrefix.svg
+    - assets/icons/userPrefix.svg
+    - assets/icons/zipPrefix.svg
     - assets/icons/doneIcon.svg    
     - assets/icons/backIcon.svg
     
