@@ -9,6 +9,8 @@ class CustomBtn extends StatelessWidget {
   final bool outlined;
   final Widget icon;
   final Color color;
+  final Color outlineColor;
+  final Color textColor;
 
   CustomBtn({
     this.fill = false,
@@ -17,6 +19,8 @@ class CustomBtn extends StatelessWidget {
     this.onClick,
     this.icon,
     this.color,
+    this.outlineColor,
+    this.textColor,
   });
 
   @override
@@ -32,7 +36,9 @@ class CustomBtn extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: outlined
-              ? BorderSide(color: mainBorderColor, width: 2)
+              ? BorderSide(
+                  color: outlineColor != null ? outlineColor : mainBorderColor,
+                  width: 2)
               : BorderSide.none,
         ),
         padding: EdgeInsets.all(15),
@@ -50,7 +56,11 @@ class CustomBtn extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: outlined ? mainBorderColor : Colors.white,
+                color: outlined
+                    ? textColor != null
+                        ? textColor
+                        : mainBorderColor
+                    : Colors.white,
                 fontWeight: FontWeight.w700,
                 fontSize: 18,
               ),

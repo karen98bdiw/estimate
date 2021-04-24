@@ -26,6 +26,8 @@ dependencies:
   flutter_svg: ^0.18.0  
   auto_size_text: ^2.1.0
   country_code_picker: ^1.2.4
+  animated_splash_screen: ^1.0.0
+  flutter_native_splash: ^0.1.9
 
 
 
@@ -73,6 +75,9 @@ flutter:
     - assets/icons/zipPrefix.svg
     - assets/icons/doneIcon.svg    
     - assets/icons/backIcon.svg
+    - assets/images/logo.gif
+    - assets/images/splash_screen.png
+    - assets/images/inAppLogo.png
     
   #   - images/a_dot_ham.jpeg
 
@@ -101,3 +106,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  background-image: assets/images/splash_screen.png
+  color: "FFFFFF"
+
+
+

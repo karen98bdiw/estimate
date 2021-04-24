@@ -43,29 +43,32 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
             ),
             Padding(
               padding: formScaffoldPadding,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      "Sign Up",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: titleColor,
-                      ),
+              child: LayoutBuilder(
+                builder: (c, cn) => SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: cn.maxWidth,
+                      minHeight: cn.maxHeight,
                     ),
-                    _form(),
-                    SizedBox(
-                      height: 20,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Sign Up",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                            color: titleColor,
+                          ),
+                        ),
+                        _form(),
+                        _checkAction(),
+                        bottom(),
+                      ],
                     ),
-                    _checkAction(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    bottom(),
-                  ],
+                  ),
                 ),
               ),
             ),

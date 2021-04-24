@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estimators_app/pages/login_screen.dart';
 import 'package:estimators_app/pages/register_screen.dart';
 import 'package:estimators_app/utils/constats.dart';
@@ -12,90 +13,135 @@ class LoginActionCheckScreen extends StatelessWidget {
       backgroundColor: mainWhiteBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.02),
-          child: Stack(
+          padding: formScaffoldPadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.64,
-                child: SvgPicture.asset(
-                  "assets/images/loginActionScreenCenterLeftClip.svg",
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: SvgPicture.asset(
-                  "assets/images/loginActionScreenTopLeftClip.svg",
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.45,
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: SvgPicture.asset(
-                    "assets/images/loginActionScreenTopRightClip.svg"),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  "assets/images/inAppLogo.svg",
-                  height: MediaQuery.of(context).size.height * 0.14,
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Estimate Your Project \n With Our Estimators",
-                        style: TextStyle(
-                          color: blueShape,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                      ),
-                      CustomBtn(
-                        title: "Sign In",
-                        onClick: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (c) => LoginScreen(),
-                          ));
-                        },
-                        fill: true,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      CustomBtn(
-                        color: Colors.transparent,
-                        outlined: true,
-                        title: "Sign Up",
-                        onClick: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (c) => RegisterScreen(),
-                            ),
-                          );
-                        },
-                        fill: true,
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              top(context),
+              buttons(context),
+              bottom(),
             ],
           ),
         ),
       ),
     );
   }
+
+  Widget buttons(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CustomBtn(
+            color: blueShape,
+            title: "Get Started",
+            onClick: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (c) => LoginScreen(),
+              ));
+            },
+            fill: true,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          CustomBtn(
+            textColor: mainBtnColor,
+            outlineColor: mainBtnColor,
+            outlined: true,
+            title: "Sign Up",
+            onClick: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (c) => RegisterScreen(),
+                ),
+              );
+            },
+            fill: true,
+          ),
+        ],
+      );
+
+  Widget top(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(
+                  height: 40,
+                  alignment: Alignment.bottomLeft,
+                  child: AutoSizeText(
+                    "ESTIMATORS",
+                    style: TextStyle(
+                      color: blueShape,
+                      fontSize: 40,
+                      height: 1,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.25,
+                height: MediaQuery.of(context).size.height * 0.15,
+                child: SvgPicture.asset(
+                  "assets/images/inAppLogo.svg",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            "The Perfect Space for Project Estimating",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.start,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            "ESTIMATORS is the world’s most powerful relationship and workflow managment tool",
+            style: TextStyle(
+              fontSize: 17,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      );
+
+  Widget bottom() => RichText(
+        text: TextSpan(children: [
+          TextSpan(
+            text:
+                "By Proceeding you acknowledge that you have read, understood and agree to our",
+            style: TextStyle(
+              fontSize: 17,
+              color: Colors.black,
+            ),
+          ),
+          WidgetSpan(
+            child: GestureDetector(
+              child: Text(
+                "Terms and Conditions",
+                style: TextStyle(
+                  fontSize: 17,
+                  color: blueShape,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () {},
+            ),
+          ),
+        ]),
+      );
 }

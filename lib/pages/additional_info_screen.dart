@@ -13,16 +13,26 @@ class _AddintionalInfoState extends State<AddintionalInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        designTypeCheckView(
-            onItemSize: MediaQuery.of(context).size.width * 0.30),
-        skillsCheckView(),
-        seniorityLevelCheck(
-            onItemSize: MediaQuery.of(context).size.width * 0.45),
-        workMission(onItemSize: MediaQuery.of(context).size.width * 0.3),
-      ],
+    return LayoutBuilder(
+      builder: (c, cn) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: cn.maxWidth,
+            minHeight: cn.maxHeight,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              designTypeCheckView(
+                  onItemSize: MediaQuery.of(context).size.width * 0.45),
+              skillsCheckView(),
+              seniorityLevelCheck(
+                  onItemSize: MediaQuery.of(context).size.width * 0.45),
+              workMission(onItemSize: MediaQuery.of(context).size.width * 0.3),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
