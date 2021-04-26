@@ -5,8 +5,9 @@ import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/country.dart';
 import 'package:estimators_app/utils/enums.dart';
 import 'package:estimators_app/utils/styles.dart';
+import 'package:estimators_app/widgets/apply_picker.dart';
 import 'package:estimators_app/widgets/buttons.dart';
-import 'package:estimators_app/widgets/country_code_picker.dart';
+import 'package:estimators_app/widgets/country_picker.dart';
 import 'package:estimators_app/widgets/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,6 +23,8 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
 
   bool obscureRepeatPassword = true;
   bool isAgreeWithAgreement = false;
+  bool isClient = false;
+  bool isTallent = false;
 
   CountryAndFlags pickerCountry = CountryAndFlags(
     name: "Armenia",
@@ -103,75 +106,123 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
 
   Widget _checkAction() => Container(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "I want to",
+              "Apply as",
               style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
+                fontSize: 20,
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.40,
-                  height: MediaQuery.of(context).size.height * 0.045,
-                  padding: EdgeInsets.all(7),
-                  child: AutoSizeText(
-                    "Estimate Project",
-                    textAlign: TextAlign.center,
-                    style: mediumTextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromRGBO(1, 97, 137, 1),
-                    ),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(7),
-                      bottomLeft: Radius.circular(7),
+                Expanded(
+                  child: Container(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isClient = !isClient;
+                              });
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: blueShape,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                "Client",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        TitledCheckBox(
+                          showTitle: false,
+                          onChanged: (v) {
+                            setState(() {
+                              isClient = v;
+                            });
+                          },
+                          value: isClient,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.11,
-                  width: 3,
-                  color: Color.fromRGBO(1, 97, 137, 1),
+                SizedBox(
+                  width: 10,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.40,
-                  height: MediaQuery.of(context).size.height * 0.045,
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.045),
-                  padding: EdgeInsets.all(7),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AutoSizeText(
-                        "Be Partner",
-                        style: mediumTextStyle(color: Colors.black),
-                      ),
-                      SizedBox(
-                        width: 7,
-                      ),
-                      SvgPicture.asset(
-                        "assets/icons/dropDownIcon.svg",
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromRGBO(1, 97, 137, 1),
-                    ),
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(7),
-                      bottomRight: Radius.circular(7),
+                Expanded(
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () async {
+                              var res = await applyPicker(context: context);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: mainBtnColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Tallent",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  SvgPicture.asset(
+                                    "assets/icons/dropDownIcon.svg",
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        TitledCheckBox(
+                          showTitle: false,
+                          onChanged: (v) {
+                            setState(() {
+                              isTallent = v;
+                            });
+                          },
+                          value: isTallent,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -180,6 +231,86 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
           ],
         ),
       );
+
+  // Widget _checkAction() => Container(
+  //       child: Column(
+  //         children: [
+  //           Text(
+  //             "I want to",
+  //             style: TextStyle(
+  //               fontWeight: FontWeight.w700,
+  //               fontSize: 18,
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 10,
+  //           ),
+  //           Row(
+  //             mainAxisSize: MainAxisSize.min,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Container(
+  //                 width: MediaQuery.of(context).size.width * 0.40,
+  //                 height: MediaQuery.of(context).size.height * 0.045,
+  //                 padding: EdgeInsets.all(7),
+  //                 child: AutoSizeText(
+  //                   "Estimate Project",
+  //                   textAlign: TextAlign.center,
+  //                   style: mediumTextStyle(
+  //                     color: Colors.black,
+  //                   ),
+  //                 ),
+  //                 decoration: BoxDecoration(
+  //                   border: Border.all(
+  //                     color: Color.fromRGBO(1, 97, 137, 1),
+  //                   ),
+  //                   borderRadius: BorderRadius.only(
+  //                     topLeft: Radius.circular(7),
+  //                     bottomLeft: Radius.circular(7),
+  //                   ),
+  //                 ),
+  //               ),
+  //               Container(
+  //                 height: MediaQuery.of(context).size.height * 0.11,
+  //                 width: 3,
+  //                 color: Color.fromRGBO(1, 97, 137, 1),
+  //               ),
+  //               Container(
+  //                 width: MediaQuery.of(context).size.width * 0.40,
+  //                 height: MediaQuery.of(context).size.height * 0.045,
+  //                 margin: EdgeInsets.only(
+  //                     top: MediaQuery.of(context).size.height * 0.045),
+  //                 padding: EdgeInsets.all(7),
+  //                 child: Row(
+  //                   mainAxisAlignment: MainAxisAlignment.center,
+  //                   children: [
+  //                     AutoSizeText(
+  //                       "Be Partner",
+  //                       style: mediumTextStyle(color: Colors.black),
+  //                     ),
+  //                     SizedBox(
+  //                       width: 7,
+  //                     ),
+  //                     SvgPicture.asset(
+  //                       "assets/icons/dropDownIcon.svg",
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 decoration: BoxDecoration(
+  //                   border: Border.all(
+  //                     color: Color.fromRGBO(1, 97, 137, 1),
+  //                   ),
+  //                   borderRadius: BorderRadius.only(
+  //                     topRight: Radius.circular(7),
+  //                     bottomRight: Radius.circular(7),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     );
 
   Widget _form() => Column(
         children: [

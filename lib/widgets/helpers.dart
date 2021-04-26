@@ -84,11 +84,13 @@ class TitledCheckBox extends StatefulWidget {
   final bool value;
   final ValueChanged onChanged;
   final String title;
+  final bool showTitle;
 
   TitledCheckBox({
     this.value,
     this.onChanged,
     this.title,
+    this.showTitle = true,
   });
 
   @override
@@ -122,15 +124,17 @@ class _TitledCheckBoxState extends State<TitledCheckBox> {
           SizedBox(
             width: 8,
           ),
-          Expanded(
-            // width: MediaQuery.of(context).size.width * 0.35,
+          widget.showTitle
+              ? Expanded(
+                  // width: MediaQuery.of(context).size.width * 0.35,
 
-            child: AutoSizeText(
-              widget.title ?? "",
-              style: mediumTextStyle(),
-              maxLines: 1,
-            ),
-          ),
+                  child: AutoSizeText(
+                    widget.title ?? "",
+                    style: mediumTextStyle(),
+                    maxLines: 1,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

@@ -42,6 +42,7 @@ class CustomFormInput extends StatelessWidget {
   final Widget sufix;
   final bool obscureText;
   final bool textCentered;
+  final TextEditingController controller;
 
   CustomFormInput({
     this.onSaved,
@@ -51,12 +52,14 @@ class CustomFormInput extends StatelessWidget {
     this.obscureText = false,
     this.textCentered = false,
     this.sufix,
+    this.controller,
   });
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 16),
       child: TextFormField(
+        controller: controller,
         textAlign: textCentered ? TextAlign.center : TextAlign.start,
         obscureText: obscureText,
         validator: validator,
