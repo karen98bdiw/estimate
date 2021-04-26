@@ -1,93 +1,90 @@
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/widgets/buttons.dart';
+import 'package:estimators_app/widgets/helpers.dart';
 import 'package:estimators_app/widgets/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: mainWhiteBackgroundColor,
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (c, cnst) => SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: cnst.maxWidth,
-                minHeight: cnst.maxHeight,
+    return KeyboardDismisser(
+      child: Scaffold(
+        backgroundColor: mainWhiteBackgroundColor,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              SvgPicture.asset(
+                "assets/images/linearBackground.svg",
+                fit: BoxFit.cover,
               ),
-              child: Stack(
-                children: [
-                  SvgPicture.asset(
-                    "assets/images/roundedAppBarClip.svg",
-                    fit: BoxFit.fill,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 30,
+              LayoutBuilder(
+                builder: (c, cnst) => SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: cnst.maxWidth,
+                      minHeight: cnst.maxHeight,
                     ),
-                    child: Container(
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                top: 18,
-                              ),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Sign In",
-                                    style: TextStyle(
-                                      color: blueShape,
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w400,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 30,
+                      ),
+                      child: Container(
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 18,
+                                ),
+                                child: Column(
+                                  children: [
+                                    FormScreenTitle("Sign In"),
+                                    SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Add your details to login",
-                                    style: TextStyle(
-                                      color: blueShape,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
+                                    Text(
+                                      "Add your details to login",
+                                      style: TextStyle(
+                                        color: blueShape,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  _form(),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Forgot your password?",
-                                    style: TextStyle(
-                                      color: blueShape,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
+                                    SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  _availiableLoginServices(),
-                                ],
+                                    _form(),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Forgot your password?",
+                                      style: TextStyle(
+                                        color: blueShape,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    _availiableLoginServices(),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

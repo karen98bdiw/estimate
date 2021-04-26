@@ -11,18 +11,25 @@ class LoginActionCheckScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainWhiteBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: formScaffoldPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              top(context),
-              buttons(context),
-              bottom(),
-            ],
+          child: LayoutBuilder(
+            builder: (c, cn) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                    minHeight: cn.maxHeight, minWidth: cn.maxWidth),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    top(context),
+                    buttons(context),
+                    bottom(),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -89,8 +96,8 @@ class LoginActionCheckScreen extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.25,
                 height: MediaQuery.of(context).size.height * 0.15,
-                child: SvgPicture.asset(
-                  "assets/images/inAppLogo.svg",
+                child: Image.asset(
+                  "assets/images/logo.gif",
                   fit: BoxFit.fill,
                 ),
               ),

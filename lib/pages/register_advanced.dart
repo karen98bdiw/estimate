@@ -11,6 +11,7 @@ import 'package:estimators_app/widgets/country_picker.dart';
 import 'package:estimators_app/widgets/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../widgets/helpers.dart';
 
 class AdvancedRegisterScreen extends StatefulWidget {
@@ -35,48 +36,50 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: mainWhiteBackgroundColor,
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            SvgPicture.asset(
-              "assets/images/roundedAppBarClip.svg",
-              width: MediaQuery.of(context).size.width,
-            ),
-            Padding(
-              padding: formScaffoldPadding,
-              child: LayoutBuilder(
-                builder: (c, cn) => SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: cn.maxWidth,
-                      minHeight: cn.maxHeight,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Sign Up",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 24,
-                            color: titleColor,
+    return KeyboardDismisser(
+      child: Scaffold(
+        backgroundColor: mainWhiteBackgroundColor,
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              SvgPicture.asset(
+                "assets/images/linearBackground.svg",
+                fit: BoxFit.fill,
+              ),
+              Padding(
+                padding: formScaffoldPadding,
+                child: LayoutBuilder(
+                  builder: (c, cn) => SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: cn.maxWidth,
+                        minHeight: cn.maxHeight,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "Sign Up",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24,
+                              color: titleColor,
+                            ),
                           ),
-                        ),
-                        _form(),
-                        _checkAction(),
-                        bottom(),
-                      ],
+                          _form(),
+                          _checkAction(),
+                          bottom(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
