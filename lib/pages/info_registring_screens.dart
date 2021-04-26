@@ -40,44 +40,42 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 bottom: 10,
               ),
               child: LayoutBuilder(
-                builder: (c, cn) => SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: cn.maxWidth,
-                      maxHeight: cn.maxHeight,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        top(),
-                        Expanded(
-                          child: actions[actionNumber],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ScreenActionChangeButton(
-                          onBackButtonClick: () {
-                            if (actionNumber - 1 > -1) {
-                              setState(() {
-                                actionNumber--;
-                              });
-                            }
-                          },
-                          onButtonClick: () {
-                            if (actionNumber < actions.length - 1) {
-                              setState(() {
-                                actionNumber++;
-                              });
-                            }
-                          },
-                          buttonTitle: actionNumber == actions.length - 1
-                              ? "SAVE"
-                              : "NEXT",
-                        ),
-                      ],
-                    ),
+                builder: (c, cn) => ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: cn.maxWidth,
+                    maxHeight: cn.maxHeight,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      top(),
+                      Expanded(
+                        child: actions[actionNumber],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ScreenActionChangeButton(
+                        onBackButtonClick: () {
+                          if (actionNumber - 1 > -1) {
+                            setState(() {
+                              actionNumber--;
+                            });
+                          }
+                        },
+                        onButtonClick: () {
+                          if (actionNumber < actions.length - 1) {
+                            setState(() {
+                              actionNumber++;
+                            });
+                          }
+                        },
+                        buttonTitle: actionNumber == actions.length - 1
+                            ? "SAVE"
+                            : "NEXT",
+                      ),
+                    ],
                   ),
                 ),
               ),

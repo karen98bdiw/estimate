@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:estimators_app/pages/login_screen.dart';
+import 'package:estimators_app/pages/register_advanced.dart';
 import 'package:estimators_app/pages/register_screen.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/widgets/buttons.dart';
@@ -52,7 +53,7 @@ class LoginActionCheckScreen extends StatelessWidget {
             onClick: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (c) => RegisterScreen(),
+                  builder: (c) => AdvancedRegisterScreen(),
                 ),
               );
             },

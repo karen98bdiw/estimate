@@ -19,6 +19,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   );
 
   final countryController = TextEditingController();
+  final scroll = ScrollController();
 
   @override
   void dispose() {
@@ -31,6 +32,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
     return Container(
       child: LayoutBuilder(
         builder: (c, cn) => SingleChildScrollView(
+          controller: scroll,
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minWidth: cn.maxWidth,

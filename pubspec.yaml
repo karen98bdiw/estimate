@@ -75,9 +75,8 @@ flutter:
     - assets/icons/zipPrefix.svg
     - assets/icons/doneIcon.svg    
     - assets/icons/backIcon.svg
-    - assets/images/logo.gif
-    - assets/images/splash_screen.png
     - assets/images/inAppLogo.png
+    - assets/images/splash.png
     
   #   - images/a_dot_ham.jpeg
 
@@ -107,7 +106,7 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_native_splash:
-  background-image: assets/images/splash_screen.png
+  image: assets/images/splash.png
   color: "FFFFFF"
 
 

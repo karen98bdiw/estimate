@@ -54,7 +54,8 @@ class RegisterScreenNumbers extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(8),
                 color: index == curentNumber ? lightBlue : Colors.transparent,
                 border: index != curentNumber
                     ? Border.all(width: 1, color: greyShape)
