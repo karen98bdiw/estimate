@@ -7,12 +7,12 @@ import 'package:estimators_app/widgets/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileDesignerScreen extends StatefulWidget {
+class InfoRegistringScreen extends StatefulWidget {
   @override
-  _ProfileDesignerScreenState createState() => _ProfileDesignerScreenState();
+  _InfoRegistringScreenState createState() => _InfoRegistringScreenState();
 }
 
-class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
+class _InfoRegistringScreenState extends State<InfoRegistringScreen> {
   int actionNumber = 0; //will controll the number of reg screen;
   bool someValue = false;
 
@@ -39,45 +39,36 @@ class _ProfileDesignerScreenState extends State<ProfileDesignerScreen> {
                 top: 30,
                 bottom: 10,
               ),
-              child: LayoutBuilder(
-                builder: (c, cn) => ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minWidth: cn.maxWidth,
-                    maxHeight: cn.maxHeight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  top(),
+                  Expanded(
+                    child: actions[actionNumber],
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      top(),
-                      Expanded(
-                        child: actions[actionNumber],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ScreenActionChangeButton(
-                        onBackButtonClick: () {
-                          if (actionNumber - 1 > -1) {
-                            setState(() {
-                              actionNumber--;
-                            });
-                          }
-                        },
-                        onButtonClick: () {
-                          if (actionNumber < actions.length - 1) {
-                            setState(() {
-                              actionNumber++;
-                            });
-                          }
-                        },
-                        buttonTitle: actionNumber == actions.length - 1
-                            ? "SAVE"
-                            : "NEXT",
-                      ),
-                    ],
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
+                  ScreenActionChangeButton(
+                    onBackButtonClick: () {
+                      if (actionNumber - 1 > -1) {
+                        setState(() {
+                          actionNumber--;
+                        });
+                      }
+                    },
+                    onButtonClick: () {
+                      if (actionNumber < actions.length - 1) {
+                        setState(() {
+                          actionNumber++;
+                        });
+                      }
+                    },
+                    buttonTitle:
+                        actionNumber == actions.length - 1 ? "SAVE" : "NEXT",
+                  ),
+                ],
               ),
             ),
           ],

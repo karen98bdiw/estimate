@@ -30,6 +30,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomPadding: true,
       child: LayoutBuilder(
         builder: (c, cn) => SingleChildScrollView(
           controller: scroll,
@@ -129,7 +131,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                 ),
                 SocialAdressInput(
                   prefix: dribblePrefix,
-                )
+                ),
               ],
             ),
           ),

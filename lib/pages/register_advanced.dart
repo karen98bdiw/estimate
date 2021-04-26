@@ -37,6 +37,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainWhiteBackgroundColor,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Stack(
           children: [
@@ -92,7 +93,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
             title: "Sign Up",
             onClick: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (c) => ProfileDesignerScreen()));
+                  MaterialPageRoute(builder: (c) => InfoRegistringScreen()));
             },
           ),
           SizedBox(

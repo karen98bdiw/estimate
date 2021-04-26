@@ -1,18 +1,22 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:estimators_app/pages/info_registring_screens.dart';
 import 'package:estimators_app/pages/introScreen.dart';
 import 'package:estimators_app/pages/loginActionCheckScreen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: LoginActionCheckScreen(),
     );
   }
+}
+
+Future<void> run() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(App());
+}
+
+Future<void> main(List<String> args) async {
+  await run();
 }

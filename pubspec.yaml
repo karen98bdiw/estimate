@@ -26,7 +26,6 @@ dependencies:
   flutter_svg: ^0.18.0  
   auto_size_text: ^2.1.0
   country_code_picker: ^1.2.4
-  animated_splash_screen: ^1.0.0
   flutter_native_splash: ^0.1.9
 
 
@@ -108,6 +107,7 @@ flutter:
 flutter_native_splash:
   image: assets/images/splash.png
   color: "FFFFFF"
+  fill : false
 
 
 
