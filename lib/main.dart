@@ -1,5 +1,3 @@
-import 'package:estimators_app/pages/info_registring_screens.dart';
-import 'package:estimators_app/pages/introScreen.dart';
 import 'package:estimators_app/pages/loginActionCheckScreen.dart';
 import 'package:flutter/material.dart';
 

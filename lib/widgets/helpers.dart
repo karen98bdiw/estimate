@@ -176,3 +176,53 @@ class MoveToSignType extends StatelessWidget {
     );
   }
 }
+
+class TitledRadioButton extends StatelessWidget {
+  final bool value;
+  final ValueChanged<bool> onChanged;
+  final String title;
+
+  TitledRadioButton({this.value, this.onChanged, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onChanged(!value),
+      child: Container(
+        padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 17,
+              height: 17,
+              padding: EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(width: 1, color: mainBorderColor),
+              ),
+              child: Center(
+                child: Container(
+                  width: 13,
+                  height: 13,
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: value ? lightBlue : Colors.transparent,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              title ?? "",
+              style: mediumTextStyle(color: Colors.black),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

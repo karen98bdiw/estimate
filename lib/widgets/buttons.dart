@@ -99,7 +99,6 @@ class ScreenActionChangeButton extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
 

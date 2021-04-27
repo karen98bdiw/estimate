@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:estimators_app/pages/info_registring_screens.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/country.dart';
 import 'package:estimators_app/utils/enums.dart';
-import 'package:estimators_app/utils/styles.dart';
 import 'package:estimators_app/widgets/apply_picker.dart';
 import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/country_picker.dart';
@@ -33,6 +31,8 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
     code: "AM",
     dialCode: "+374",
   );
+
+  var apply = {"name": "Tallent"};
 
   @override
   Widget build(BuildContext context) {
@@ -183,6 +183,9 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                           child: GestureDetector(
                             onTap: () async {
                               var res = await applyPicker(context: context);
+                              setState(() {
+                                apply = res;
+                              });
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
@@ -195,11 +198,15 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    "Tallent",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
+                                  Expanded(
+                                    child: Text(
+                                      apply["name"],
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   SizedBox(
@@ -235,86 +242,6 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
           ],
         ),
       );
-
-  // Widget _checkAction() => Container(
-  //       child: Column(
-  //         children: [
-  //           Text(
-  //             "I want to",
-  //             style: TextStyle(
-  //               fontWeight: FontWeight.w700,
-  //               fontSize: 18,
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Row(
-  //             mainAxisSize: MainAxisSize.min,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Container(
-  //                 width: MediaQuery.of(context).size.width * 0.40,
-  //                 height: MediaQuery.of(context).size.height * 0.045,
-  //                 padding: EdgeInsets.all(7),
-  //                 child: AutoSizeText(
-  //                   "Estimate Project",
-  //                   textAlign: TextAlign.center,
-  //                   style: mediumTextStyle(
-  //                     color: Colors.black,
-  //                   ),
-  //                 ),
-  //                 decoration: BoxDecoration(
-  //                   border: Border.all(
-  //                     color: Color.fromRGBO(1, 97, 137, 1),
-  //                   ),
-  //                   borderRadius: BorderRadius.only(
-  //                     topLeft: Radius.circular(7),
-  //                     bottomLeft: Radius.circular(7),
-  //                   ),
-  //                 ),
-  //               ),
-  //               Container(
-  //                 height: MediaQuery.of(context).size.height * 0.11,
-  //                 width: 3,
-  //                 color: Color.fromRGBO(1, 97, 137, 1),
-  //               ),
-  //               Container(
-  //                 width: MediaQuery.of(context).size.width * 0.40,
-  //                 height: MediaQuery.of(context).size.height * 0.045,
-  //                 margin: EdgeInsets.only(
-  //                     top: MediaQuery.of(context).size.height * 0.045),
-  //                 padding: EdgeInsets.all(7),
-  //                 child: Row(
-  //                   mainAxisAlignment: MainAxisAlignment.center,
-  //                   children: [
-  //                     AutoSizeText(
-  //                       "Be Partner",
-  //                       style: mediumTextStyle(color: Colors.black),
-  //                     ),
-  //                     SizedBox(
-  //                       width: 7,
-  //                     ),
-  //                     SvgPicture.asset(
-  //                       "assets/icons/dropDownIcon.svg",
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 decoration: BoxDecoration(
-  //                   border: Border.all(
-  //                     color: Color.fromRGBO(1, 97, 137, 1),
-  //                   ),
-  //                   borderRadius: BorderRadius.only(
-  //                     topRight: Radius.circular(7),
-  //                     bottomRight: Radius.circular(7),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     );
 
   Widget _form() => Column(
         children: [

@@ -1,7 +1,6 @@
 import 'package:estimators_app/pages/additional_info_screen.dart';
 import 'package:estimators_app/pages/personal_info_screen.dart';
 import 'package:estimators_app/utils/constats.dart';
-import 'package:estimators_app/utils/styles.dart';
 import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/helpers.dart';
 import 'package:flutter/material.dart';
