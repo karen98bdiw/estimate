@@ -1,3 +1,5 @@
+import 'package:estimators_app/pages/forgot_password_screen.dart';
+import 'package:estimators_app/pages/reset_code_screen.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/helpers.dart';
@@ -61,12 +63,47 @@ class LoginScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    Text(
-                                      "Forgot your password?",
-                                      style: TextStyle(
-                                        color: blueShape,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (c) =>
+                                                ForgotPasswordScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 8),
+                                        child: Text(
+                                          "Forgot your password?",
+                                          style: TextStyle(
+                                            color: blueShape,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (c) => ResetCodeScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 8),
+                                        child: Text(
+                                          "Reset Code Test",
+                                          style: TextStyle(
+                                            color: blueShape,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
