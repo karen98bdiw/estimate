@@ -10,3 +10,5 @@ var linkedinPrefix = SvgPicture.asset(path + "linkedinPrefix.svg");
 var locationPrefix = SvgPicture.asset(path + "locationPrefix.svg");
 var zipPrefix = SvgPicture.asset(path + "zipPrefix.svg");
 var behancePrefix = SvgPicture.asset(path + "behancePrefix.svg");
+var positonPrefix = SvgPicture.asset(path + "positionIcon.svg");
+var companyPrefix = SvgPicture.asset(path + "companyNameIcon.svg");

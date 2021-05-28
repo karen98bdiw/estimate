@@ -1,3 +1,4 @@
+import 'package:estimators_app/models/register_request_model.dart';
 import 'package:estimators_app/pages/additional_info_screen.dart';
 import 'package:estimators_app/pages/personal_info_screen.dart';
 import 'package:estimators_app/utils/constats.dart';
@@ -8,6 +9,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class InfoRegistringScreen extends StatefulWidget {
+  final bool isClient;
+  final RegisterRequestModel model;
+
+  InfoRegistringScreen({
+    this.isClient,
+    this.model,
+  });
+
   @override
   _InfoRegistringScreenState createState() => _InfoRegistringScreenState();
 }
@@ -16,10 +25,31 @@ class _InfoRegistringScreenState extends State<InfoRegistringScreen> {
   int actionNumber = 0; //will controll the number of reg screen;
   bool someValue = false;
 
-  var actions = [
-    AddintionalInfo(),
-    PersonalInfo(),
-  ];
+  var actions;
+
+  @override
+  void initState() {
+    actions = [
+      if (!widget.isClient)
+        AddintionalInfo(
+          model: widget.model,
+        ),
+      PersonalInfo(
+        model: widget.model,
+        isClient: widget.isClient,
+      ),
+    ];
+
+    super.initState();
+  }
+
+  void onSave() {
+    PersonalInfo.personalInfoStateKey.currentState.onSave();
+  }
+
+  void onAdditionalInfoSave() {
+    AddintionalInfo.additionalInfoState.currentState.onSave();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +87,18 @@ class _InfoRegistringScreenState extends State<InfoRegistringScreen> {
                           setState(() {
                             actionNumber--;
                           });
+                        } else {
+                          Navigator.of(context).pop();
                         }
                       },
                       onButtonClick: () {
                         if (actionNumber < actions.length - 1) {
                           setState(() {
+                            onAdditionalInfoSave();
                             actionNumber++;
                           });
+                        } else {
+                          onSave();
                         }
                       },
                       buttonTitle:
@@ -82,8 +117,8 @@ class _InfoRegistringScreenState extends State<InfoRegistringScreen> {
   Widget top() => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          FormScreenTitle("Profile (designer)"),
-          RegisterScreenNumbers(actionNumber),
+          FormScreenTitle("Profile (${widget.isClient ? "Client" : "Talent"})"),
+          if (!widget.isClient) RegisterScreenNumbers(actionNumber),
         ],
       );
 }

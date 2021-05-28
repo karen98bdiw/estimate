@@ -2,15 +2,19 @@ import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/styles.dart';
 import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/helpers.dart';
-import 'package:estimators_app/widgets/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class ResetCodeScreen extends StatelessWidget {
-  String code = "";
+class ResetCodeScreen extends StatefulWidget {
+  @override
+  _ResetCodeScreenState createState() => _ResetCodeScreenState();
+}
+
+class _ResetCodeScreenState extends State<ResetCodeScreen> {
+   String code = "";
 
   @override
   Widget build(BuildContext context) {

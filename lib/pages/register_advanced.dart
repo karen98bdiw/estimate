@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:estimators_app/models/register_request_model.dart';
 import 'package:estimators_app/pages/info_registring_screens.dart';
+import 'package:estimators_app/utils/app_constats.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/country.dart';
 import 'package:estimators_app/utils/enums.dart';
@@ -8,7 +10,9 @@ import 'package:estimators_app/widgets/buttons.dart';
 import 'package:estimators_app/widgets/country_picker.dart';
 import 'package:estimators_app/widgets/inputs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../widgets/helpers.dart';
 
@@ -25,6 +29,12 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
   bool isClient = false;
   bool isTallent = false;
 
+  final RegisterRequestModel model = RegisterRequestModel();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
+
   CountryAndFlags pickerCountry = CountryAndFlags(
     name: "Armenia",
     flag: "🇦🇲",
@@ -33,6 +43,31 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
   );
 
   var apply = {"name": "Tallent"};
+
+  @override
+  void dispose() {
+    passwordController.clear();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
+  onSingUp() {
+    if (!_formState.currentState.validate()) return;
+
+    _formState.currentState.save();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (c) => InfoRegistringScreen(
+          isClient: isClient,
+          model: model,
+        ),
+      ),
+    );
+
+    print("model ${model.toJson()}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +129,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
           ),
           CustomBtn(
             title: "Sign Up",
-            onClick: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (c) => InfoRegistringScreen()));
-            },
+            onClick: onSingUp,
           ),
           SizedBox(
             height: 5,
@@ -134,6 +166,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                             onTap: () {
                               setState(() {
                                 isClient = !isClient;
+                                isTallent = false;
                               });
                             },
                             child: Container(
@@ -162,6 +195,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                           onChanged: (v) {
                             setState(() {
                               isClient = v;
+                              isTallent = false;
                             });
                           },
                           value: isClient,
@@ -183,9 +217,11 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                           child: GestureDetector(
                             onTap: () async {
                               var res = await applyPicker(context: context);
-                              setState(() {
-                                apply = res;
-                              });
+                              if (res != null) {
+                                setState(() {
+                                  apply = res;
+                                });
+                              }
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
@@ -229,6 +265,7 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
                           onChanged: (v) {
                             setState(() {
                               isTallent = v;
+                              isClient = false;
                             });
                           },
                           value: isTallent,
@@ -243,57 +280,79 @@ class _AdvancedRegisterScreenState extends State<AdvancedRegisterScreen> {
         ),
       );
 
-  Widget _form() => Column(
-        children: [
-          CustomFormInput(
-            hint: "Email",
-            prefix: SvgPicture.asset(
-              "assets/icons/emailPrefix.svg",
+  Widget _form() => Form(
+        key: _formState,
+        child: Column(
+          children: [
+            CustomFormInput(
+              validator: MultiValidator([
+                PatternValidator(AppContstats.Regexp_Email,
+                    errorText: "Please write valid email!"),
+                RequiredValidator(errorText: "Please write email!"),
+              ]),
+              onSaved: (v) => model.email = v,
+              hint: "Email",
+              prefix: SvgPicture.asset(
+                "assets/icons/emailPrefix.svg",
+              ),
             ),
-          ),
-          CustomFormInput(
-            hint: "Phone Number",
-            prefix: GestureDetector(
-              child: Text(pickerCountry.flag + " " + pickerCountry.dialCode),
-              onTap: () async {
-                var res = await countyPickerDialog(context: context);
-                setState(() {
-                  pickerCountry = res ?? pickerCountry;
-                });
-              },
+            CustomFormInput(
+              validator: RequiredValidator(errorText: "Please write phone!"),
+              onSaved: (newValue) =>
+                  model.phoneNumber = pickerCountry.dialCode + newValue,
+              hint: "Phone Number",
+              formatters: [FilteringTextInputFormatter.digitsOnly],
+              prefix: GestureDetector(
+                child: Text(pickerCountry.flag + " " + pickerCountry.dialCode),
+                onTap: () async {
+                  var res = await countyPickerDialog(context: context);
+                  setState(() {
+                    pickerCountry = res ?? pickerCountry;
+                  });
+                },
+              ),
             ),
-          ),
-          CustomFormInput(
-            hint: "Create Password",
-            obscureText: obscurePassword,
-            prefix: SvgPicture.asset(
-              "assets/icons/passwordPrefix.svg",
+            CustomFormInput(
+              validator: RequiredValidator(errorText: "Please write password"),
+              onSaved: (v) => model.password = v,
+              controller: passwordController,
+              hint: "Create Password",
+              obscureText: obscurePassword,
+              prefix: SvgPicture.asset(
+                "assets/icons/passwordPrefix.svg",
+              ),
+              sufix: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    obscurePassword = !obscurePassword;
+                  });
+                },
+                child: SvgPicture.asset("assets/icons/passwordSuffix.svg"),
+              ),
             ),
-            sufix: GestureDetector(
-              onTap: () {
-                setState(() {
-                  obscurePassword = !obscurePassword;
-                });
-              },
-              child: SvgPicture.asset("assets/icons/passwordSuffix.svg"),
+            CustomFormInput(
+              validator: (newValue) => newValue.isEmpty
+                  ? "Please repeat password!"
+                  : newValue == passwordController.text
+                      ? null
+                      : "Password did't match!",
+              onSaved: (v) => model.confirmPassword = v,
+              obscureText: obscureRepeatPassword,
+              sufix: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    obscureRepeatPassword = !obscureRepeatPassword;
+                  });
+                },
+                child: SvgPicture.asset("assets/icons/passwordSuffix.svg"),
+              ),
+              hint: "Repeat Password",
+              prefix: SvgPicture.asset(
+                "assets/icons/passwordPrefix.svg",
+              ),
             ),
-          ),
-          CustomFormInput(
-            obscureText: obscureRepeatPassword,
-            sufix: GestureDetector(
-              onTap: () {
-                setState(() {
-                  obscureRepeatPassword = !obscureRepeatPassword;
-                });
-              },
-              child: SvgPicture.asset("assets/icons/passwordSuffix.svg"),
-            ),
-            hint: "Repeate Password",
-            prefix: SvgPicture.asset(
-              "assets/icons/passwordPrefix.svg",
-            ),
-          ),
-        ],
+          ],
+        ),
       );
 
   Widget agreement() => Container(

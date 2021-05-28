@@ -1,15 +1,26 @@
+import 'package:estimators_app/models/register_request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:estimators_app/utils/constats.dart';
 import 'package:estimators_app/utils/styles.dart';
 import 'package:estimators_app/widgets/helpers.dart';
 
 class AddintionalInfo extends StatefulWidget {
+  final RegisterRequestModel model;
+  AddintionalInfo({this.model}) : super(key: additionalInfoState);
+
+  static final GlobalKey<_AddintionalInfoState> additionalInfoState =
+      GlobalKey<_AddintionalInfoState>();
+
   @override
   _AddintionalInfoState createState() => _AddintionalInfoState();
 }
 
 class _AddintionalInfoState extends State<AddintionalInfo> {
   bool someValue = false;
+
+  void onSave() {
+    print("additionalInfoSave");
+  }
 
   @override
   Widget build(BuildContext context) {

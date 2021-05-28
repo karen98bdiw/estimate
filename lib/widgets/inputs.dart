@@ -1,5 +1,6 @@
 import 'package:estimators_app/utils/constats.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomInput extends StatelessWidget {
   final FormFieldValidator<String> validator;
@@ -43,6 +44,8 @@ class CustomFormInput extends StatelessWidget {
   final bool obscureText;
   final bool textCentered;
   final TextEditingController controller;
+  final AutovalidateMode autovalidateMode;
+  final List<TextInputFormatter> formatters;
 
   CustomFormInput({
     this.onSaved,
@@ -53,6 +56,8 @@ class CustomFormInput extends StatelessWidget {
     this.textCentered = false,
     this.sufix,
     this.controller,
+    this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    this.formatters,
   });
   @override
   Widget build(BuildContext context) {
@@ -63,6 +68,8 @@ class CustomFormInput extends StatelessWidget {
         textAlign: textCentered ? TextAlign.center : TextAlign.start,
         obscureText: obscureText,
         validator: validator,
+        autovalidateMode: autovalidateMode,
+        inputFormatters: formatters,
         onSaved: onSaved,
         decoration: InputDecoration(
           prefixIcon: prefix != null

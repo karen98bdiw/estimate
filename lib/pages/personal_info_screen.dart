@@ -1,3 +1,5 @@
+import 'package:estimators_app/managment/auth_managment.dart';
+import 'package:estimators_app/models/register_request_model.dart';
 import 'package:estimators_app/utils/country.dart';
 import 'package:estimators_app/widgets/country_picker.dart';
 import 'package:estimators_app/widgets/helpers.dart';
@@ -7,6 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PersonalInfo extends StatefulWidget {
+  final bool isClient;
+  final RegisterRequestModel model;
+
+  static final GlobalKey<_PersonalInfoState> personalInfoStateKey =
+      GlobalKey<_PersonalInfoState>();
+
+  PersonalInfo({this.isClient, this.model}) : super(key: personalInfoStateKey);
+
   @override
   _PersonalInfoState createState() => _PersonalInfoState();
 }
@@ -31,7 +41,39 @@ class _PersonalInfoState extends State<PersonalInfo> {
     super.dispose();
   }
 
-  var key = GlobalKey<FormState>();
+  final GlobalKey<FormState> formState = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    if (widget.isClient) {
+      widget.model.clientRequest = ClientRequest();
+    } else {
+      widget.model.clientRequest = null;
+    }
+    widget.model.location = Location();
+    widget.model.links = [];
+    super.initState();
+  }
+
+  void onSave() {
+    print("onSave");
+    formState.currentState.save();
+    if (widget.isClient) {
+      widget.model.clientRequest.clientType =
+          isCopmany ? "COMPANY" : "INDIVIDUAL";
+    }
+    print(widget.model.toJson());
+
+    var res = AuthManagment().register(widget.model);
+
+    resetModel();
+  }
+
+  void resetModel() {
+    widget.model.location = Location();
+    widget.model.links = [];
+    widget.model.clientRequest = ClientRequest();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +89,41 @@ class _PersonalInfoState extends State<PersonalInfo> {
               minHeight: cn.maxHeight,
             ),
             child: Form(
-              key: key,
+              key: formState,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  checkAccauntTarget(),
+                  widget.isClient ? checkAccauntTarget() : Container(),
+                  if (widget.isClient && isCopmany)
+                    CustomFormInput(
+                      hint: "Company name",
+                      prefix: companyPrefix,
+                      onSaved: (v) =>
+                          widget.model.clientRequest.companyName = v,
+                    ),
+                  if (widget.isClient && isCopmany)
+                    CustomFormInput(
+                      hint: "Positon",
+                      prefix: positonPrefix,
+                      onSaved: (v) =>
+                          widget.model.clientRequest.yourPosition = v,
+                    ),
                   CustomFormInput(
                     hint: "First name",
                     prefix: userPrefix,
+                    onSaved: (v) => widget.model.firstname = v,
                   ),
                   CustomFormInput(
                     hint: "Last name",
                     prefix: userPrefix,
+                    onSaved: (v) => widget.model.lastName = v,
                   ),
                   CustomFormInput(
                     controller: countryController,
                     hint: "Country",
+                    onSaved: (v) =>
+                        widget.model.location.country = pickerCountry.name,
                     sufix: GestureDetector(
                       child: GestureDetector(
                         child:
@@ -94,6 +154,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       Flexible(
                         flex: 1,
                         child: CustomFormInput(
+                          onSaved: (v) => widget.model.location.state = v,
                           hint: "State",
                           textCentered: true,
                         ),
@@ -104,6 +165,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       Flexible(
                         flex: 2,
                         child: CustomFormInput(
+                          onSaved: (v) => widget.model.location.city = v,
                           hint: "City",
                           prefix: locationPrefix,
                         ),
@@ -111,6 +173,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     ],
                   ),
                   CustomFormInput(
+                    onSaved: (v) => widget.model.location.streetAddress = v,
                     hint: "Street adress",
                     prefix: adressPrefix,
                   ),
@@ -118,6 +181,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     children: [
                       Expanded(
                         child: CustomFormInput(
+                          onSaved: (v) => widget.model.location.aptSuite = v,
                           prefix: buildingPrefix,
                           hint: "Apt/Suite",
                         ),
@@ -127,6 +191,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       ),
                       Expanded(
                         child: CustomFormInput(
+                          onSaved: (v) => widget.model.location.zipCode = v,
                           hint: "Zip code",
                           prefix: zipPrefix,
                         ),
@@ -134,12 +199,15 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     ],
                   ),
                   SocialAdressInput(
+                    onSaved: (v) => widget.model.links.add(Links(name: v)),
                     prefix: linkedinPrefix,
                   ),
                   SocialAdressInput(
+                    onSaved: (v) => widget.model.links.add(Links(name: v)),
                     prefix: behancePrefix,
                   ),
                   SocialAdressInput(
+                    onSaved: (v) => widget.model.links.add(Links(name: v)),
                     prefix: dribblePrefix,
                   ),
                 ],

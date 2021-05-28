@@ -12,3 +12,4 @@ const titleColor = Color.fromRGBO(0, 40, 57, 1);
 const greyShape = Color.fromRGBO(203, 203, 203, 1);
 
 const formScaffoldPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 30);
+

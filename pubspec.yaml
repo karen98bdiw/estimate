@@ -29,6 +29,12 @@ dependencies:
   flutter_native_splash: ^0.1.9
   keyboard_dismisser: ^1.0.2
   pin_code_fields: ^3.1.2
+  flutter_dotenv: ^3.1.0
+  form_field_validator: ^1.0.1
+  provider: ^4.3.3
+  dio: ^3.0.10
+  http: ^0.12.2
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -75,6 +81,8 @@ flutter:
     - assets/icons/zipPrefix.svg
     - assets/icons/doneIcon.svg    
     - assets/icons/backIcon.svg
+    - assets/icons/companyNameIcon.svg
+    - assets/icons/positionIcon.svg
     - assets/images/inAppLogo.png
     - assets/images/splash.png
     - assets/images/logo.gif
